@@ -125,5 +125,17 @@ class polygon:
             yDelta = self.segments[i].p2.y - self.segments[i].p1.y
             perimeter = perimeter + (xDelta**2 + yDelta**2)**0.5
         return perimeter
+    
+    
+    def getArea(self):
+        'Returns area within interior of the polygon.'
+        
+        # cycle through segments, sum areas formed from segment to zero-plane
+        area = 0.0;
+        for i in range(self.segmentCount):
+            p1 = self.segments[i].p1;
+            p2 = self.segments[i].p2;
+            area = area + (p1.x + p2.x)*(p1.y - p2.y)
+        return abs(0.5*area)
         
         
