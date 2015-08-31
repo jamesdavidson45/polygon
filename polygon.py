@@ -137,5 +137,19 @@ class polygon:
             p2 = self.segments[i].p2;
             area = area + (p1.x + p2.x)*(p1.y - p2.y)
         return abs(0.5*area)
+    
+    
+    def getNewTransformedPolygon(self,homTransArray):
+        'Applies homogenous transformation matrix to polygon, returns new.'
+        
+        # multiply array of vertices by transformation array
+        homTransArray = npy.array(homTransArray)
+        augOnes = npy.ones((self.verticesCount,1))
+        homVertices = npy.concatenate((self.vertices,augOnes),axis=1)
+        newHomVertices = npy.dot(homVertices,homTransArray)
+        
+        # strip off homogenous coordinates, return new polygon
+        newVertices = newHomVertices[:,:-1]
+        return polygon(newVertices)
         
         
