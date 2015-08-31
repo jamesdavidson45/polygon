@@ -113,5 +113,17 @@ class polygon:
         
         # return cross product based conditional
         return (p2.x - p1.x) * (p3.y - p1.y) > (p2.y - p1.y) * (p3.x - p1.x)
+    
+    
+    def getPerimeter(self):
+        'Returns distance along the polygon perimeter.'
+        
+        # cycle through segments, sum each length
+        perimeter = 0.0
+        for i in range(self.segmentCount):
+            xDelta = self.segments[i].p2.x - self.segments[i].p1.x
+            yDelta = self.segments[i].p2.y - self.segments[i].p1.y
+            perimeter = perimeter + (xDelta**2 + yDelta**2)**0.5
+        return perimeter
         
         
